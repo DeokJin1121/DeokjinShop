@@ -1,5 +1,6 @@
 package inhatc.cse.deokjinshop.item.controller;
 
+import groovyjarjarantlr4.v4.codegen.model.SrcOp;
 import inhatc.cse.deokjinshop.item.dto.ItemDataDto;
 import inhatc.cse.deokjinshop.item.dto.ItemDto;
 import org.springframework.stereotype.Controller;
@@ -9,6 +10,26 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class ItemController {
+
+    @GetMapping("/cart")
+    public String cartList() {
+        return "cart/list";
+    }
+
+    @GetMapping("/orders")
+    public String orderList() {
+        return "order/list";
+    }
+
+    @GetMapping("/admin/item/add")
+    public String itemAdd() {
+        return "item/add";
+    }
+
+    @GetMapping("/admin/items")
+    public String itemList() {
+        return "item/list";
+    }
 
     @GetMapping("/item/thymeleaf1")
     public String thymeleaf1(Model model) {

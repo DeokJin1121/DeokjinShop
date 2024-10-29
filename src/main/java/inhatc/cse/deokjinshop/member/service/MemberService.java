@@ -4,17 +4,24 @@ import inhatc.cse.deokjinshop.member.entity.Member;
 import inhatc.cse.deokjinshop.member.repository.MemberRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
 import java.util.Optional;
 
 @Service
 @Transactional
+@Slf4j
 @RequiredArgsConstructor
-public class MemberService {
+public class MemberService implements UserDetailsService {
 
     private final MemberRepository memberRepository;
-
 
     private void validateDupMember(Member member) {     // 사용자가 중복 여부
 
@@ -24,8 +31,6 @@ public class MemberService {
             throw new IllegalStateException("이미 존재하는 사용자 입니다");
         }
 
-//        Member m2 = memberRepository.findByEmail(member.getEmail())
-//                .orElseThrow(() -> new IllegalStateException("예외 발생"));
     }
 
     public Member saveMember(Member member) {
@@ -34,5 +39,20 @@ public class MemberService {
         return m;
     }
 
+    @Override
+    public UserDetails loadUserByUsername(String eamil) throws UsernameNotFoundException {
+
+        Member member = memberRepository.findByEmail(eamil)
+                .orElseThrow(() -> new UsernameNotFoundException("해당 사용자를 찾을 수 없습니다." + eamil));
+
+        log.info(member.toString());
+
+        return User.builder()
+                .username(member.getEmail())
+                .password(member.getPassword())
+                .roles(member.getRole().toString())
+                .build();
+    }
 
 }
+
