@@ -1,12 +1,14 @@
 package inhatc.cse.deokjinshop.item.controller;
 
-import groovyjarjarantlr4.v4.codegen.model.SrcOp;
 import inhatc.cse.deokjinshop.item.dto.ItemDataDto;
 import inhatc.cse.deokjinshop.item.dto.ItemDto;
+import inhatc.cse.deokjinshop.item.dto.ItemFormDto;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class ItemController {
@@ -22,7 +24,8 @@ public class ItemController {
     }
 
     @GetMapping("/admin/item/add")
-    public String itemAdd() {
+    public String itemAdd(Model model) {
+        model.addAttribute("itemFormDto", new ItemFormDto());
         return "item/add";
     }
 
@@ -52,5 +55,22 @@ public class ItemController {
         System.out.println("============" + itemDataDto);
         model.addAttribute("item", itemDataDto);
         return "item/thymeleaf2";
+    }
+
+    @GetMapping("/item/thymeleaf3")
+    public String thymeleaf3(Model model) {
+        List<ItemDto> itemDtoList = new ArrayList<>();
+
+        for (int i = 0; i < 10; i++) {
+            ItemDto itemDto = new ItemDto();
+            itemDto.setItemDetail("상품 상세 설명" + i);
+            itemDto.setItemNm("테스트 상품" + i);
+            itemDto.setPrice(1000*i);
+
+            itemDtoList.add(itemDto);
+        }
+        model.addAttribute("itemDtoList", itemDtoList);
+        System.out.println("itemDtoList size: " + itemDtoList.size());
+        return "item/thymeleaf3";
     }
 }

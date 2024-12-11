@@ -1,5 +1,6 @@
 package inhatc.cse.deokjinshop.cart.entity;
 
+import inhatc.cse.deokjinshop.common.entity.BaseEntity;
 import inhatc.cse.deokjinshop.item.entity.Item;
 import jakarta.persistence.*;
 import lombok.*;
@@ -11,7 +12,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class CartItem {
+public class CartItem extends BaseEntity {
     @Id     // 기본키 설정
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "cart_item_id")

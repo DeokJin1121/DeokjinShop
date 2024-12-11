@@ -35,6 +35,14 @@
         name: test
         password: 1234
 
+    servlet:
+      multipart:
+       max-file-size: 20MB
+       max-request-size: 100MB
+
+  itemImgLocation : D:/shop/item  # 서버 내부에서 파일 저장 경로
+  uploadPath : file:///D:/shop    # 클라이언트 파일접근을 위한 URL 경로
+
   logging:
     level:
       org:

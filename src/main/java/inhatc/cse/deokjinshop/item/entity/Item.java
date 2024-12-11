@@ -1,5 +1,7 @@
 package inhatc.cse.deokjinshop.item.entity;
 
+import inhatc.cse.deokjinshop.common.entity.BaseEntity;
+import inhatc.cse.deokjinshop.item.constant.ItemSellStatus;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -10,7 +12,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Item {
+public class Item extends BaseEntity {
 
     @Id     // 기본키 설정
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,5 +30,8 @@ public class Item {
     @Lob
     @Column(nullable = false)
     private String itemDetail;
+
+    @Enumerated(EnumType.STRING)
+    private ItemSellStatus itemSellStatus;
 
 }

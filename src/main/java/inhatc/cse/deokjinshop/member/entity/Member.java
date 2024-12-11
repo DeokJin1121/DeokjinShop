@@ -1,5 +1,6 @@
 package inhatc.cse.deokjinshop.member.entity;
 
+import inhatc.cse.deokjinshop.common.entity.BaseEntity;
 import inhatc.cse.deokjinshop.member.constant.Role;
 import inhatc.cse.deokjinshop.member.dto.MemberDto;
 import jakarta.persistence.*;
@@ -13,7 +14,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Member {       // 테이블인데 기본키가 없어서 오류 발생
+public class Member extends BaseEntity {       // 테이블인데 기본키가 없어서 오류 발생
 
     @Id     // 기본키 설정
     @GeneratedValue(strategy = GenerationType.IDENTITY)

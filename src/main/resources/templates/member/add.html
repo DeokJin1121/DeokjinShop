@@ -10,6 +10,7 @@
         }
     </style>
 </th:block>
+
 <th:block layout:fragment="script">
     <script th:inline="javascript">
         $(document).ready(function(){
@@ -20,6 +21,7 @@
         });
     </script>
 </th:block>
+
 <div layout:fragment="content">
     <h1>회원 등록 페이지</h1>
     <form action="/member/add" role="form" method ="post" th:object="${memberDto}">
